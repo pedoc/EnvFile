@@ -2,6 +2,9 @@ package net.ashald.envfile;
 
 import java.util.Map;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Predicate;
 
 
 public interface EnvVarsProviderFactory {
@@ -15,4 +18,7 @@ public interface EnvVarsProviderFactory {
 
     boolean isEditable();
 
+    @Nullable Predicate<String> getFileNamePredicate();
+
+    boolean showHiddenFiles();
 }

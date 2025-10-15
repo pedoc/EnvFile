@@ -6,9 +6,11 @@ import net.ashald.envfile.providers.EnvFileExecutor;
 import net.ashald.envfile.providers.EnvFileReader;
 import net.ashald.envfile.providers.SingleFileEnvVarsProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class DotEnvFileParserFactory implements EnvVarsProviderFactory {
 
@@ -30,6 +32,16 @@ public class DotEnvFileParserFactory implements EnvVarsProviderFactory {
 
     @Override
     public boolean isEditable() {
+        return true;
+    }
+
+    @Override
+    public @Nullable Predicate<String> getFileNamePredicate() {
+        return null;
+    }
+
+    @Override
+    public boolean showHiddenFiles() {
         return true;
     }
 

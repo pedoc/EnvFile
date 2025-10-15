@@ -11,6 +11,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.ListPopup;
+import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.Conditions;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
@@ -45,6 +46,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.function.Predicate;
 
 
 class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPanel {
@@ -192,12 +194,20 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
             }
 
             final String title = String.format("%s file", extension.getFactory().getTitle());
+            final Predicate<String> fileNamePredicate = extension.getFactory().getFileNamePredicate();
+            final Condition<VirtualFile> maybeFileFilter = fileNamePredicate != null ?
+                    file -> fileNamePredicate.test(file.getName()) :
+                    null;
+
+            final boolean showHiddenFiles = extension.getFactory().showHiddenFiles();
             AnAction anAction = new AnAction(title) {
                 @Override
                 public void actionPerformed(AnActionEvent e) {
                     final FileChooserDescriptor chooserDescriptor = FileChooserDescriptorFactory
                             .createSingleFileNoJarsDescriptor()
-                            .withTitle(String.format("Select %s", title));
+                            .withTitle(String.format("Select %s", title))
+                            .withFileFilter(maybeFileFilter)
+                            .withShowHiddenFiles(showHiddenFiles);
 
                     Project project = runConfig.getProject();
 

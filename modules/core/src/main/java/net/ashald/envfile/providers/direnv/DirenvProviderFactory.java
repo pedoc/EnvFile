@@ -1,4 +1,5 @@
-package net.ashald.envfile.providers.runconfig;
+package net.ashald.envfile.providers.direnv;
+
 
 import net.ashald.envfile.EnvVarsProvider;
 import net.ashald.envfile.EnvVarsProviderFactory;
@@ -9,31 +10,31 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class RunConfigEnvVarsProviderFactory implements EnvVarsProviderFactory {
+public class DirenvProviderFactory implements EnvVarsProviderFactory {
 
     @Override
     public EnvVarsProvider createProvider(Map<String, String> baseEnvVars, Consumer<String> logger) {
-        return new RunConfigEnvVarsProvider(baseEnvVars);
+        return new DirenvProvider();
     }
 
     @Override
     public @NotNull String getTitle() {
-        return "Run Config";
+        return ".envrc";
     }
 
     @Override
     public boolean isEditable() {
-        return false;
+        return true;
     }
 
     @Override
     public @Nullable Predicate<String> getFileNamePredicate() {
-        return null;
+        return name -> name.equals(".envrc");
     }
 
     @Override
     public boolean showHiddenFiles() {
-        return false;
+        return true;
     }
 
 }
