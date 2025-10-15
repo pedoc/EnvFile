@@ -1,8 +1,9 @@
-package net.ashald.envfile.providers.direnv;
+package net.ashald.envfile.providers.shenv;
 
 
 import net.ashald.envfile.EnvVarsProvider;
 import net.ashald.envfile.EnvVarsProviderFactory;
+import net.ashald.envfile.providers.direnv.DirenvProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,19 +11,19 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class DirenvProviderFactory implements EnvVarsProviderFactory {
+public class ShenvProviderFactory implements EnvVarsProviderFactory {
 
     @Override
     public EnvVarsProvider createProvider(
             Map<String, String> baseEnvVars,
             Consumer<String> logger
     ) {
-        return new DirenvProvider();
+        return new ShenvProvider();
     }
 
     @Override
     public @NotNull String getTitle() {
-        return ".envrc";
+        return ".sh";
     }
 
     @Override
@@ -32,7 +33,7 @@ public class DirenvProviderFactory implements EnvVarsProviderFactory {
 
     @Override
     public @Nullable Predicate<String> getFileNamePredicate() {
-        return name -> name.equals(".envrc") || name.equals(".sh");
+        return name -> name.equals(".sh");
     }
 
     @Override

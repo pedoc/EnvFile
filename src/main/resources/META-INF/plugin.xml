@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>net.ashald.envfile</id>
   <name>EnvFile</name>
-  <version>3.4.3</version>
+  <version>3.4.4</version>
   <vendor email="envfile@ashald.net">Borys Pierov</vendor>
 
   <description><![CDATA[
@@ -68,6 +68,7 @@
     <envVarsProvider id="toml" factory="net.ashald.envfile.providers.toml.TomlEnvFileParserFactory"/>
     <envVarsProvider id="runconfig" factory="net.ashald.envfile.providers.runconfig.RunConfigEnvVarsProviderFactory"/>
     <envVarsProvider id="direnv" factory="net.ashald.envfile.providers.direnv.DirenvProviderFactory"/>
+    <envVarsProvider id="sh" factory="net.ashald.envfile.providers.shenv.ShenvProviderFactory"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
