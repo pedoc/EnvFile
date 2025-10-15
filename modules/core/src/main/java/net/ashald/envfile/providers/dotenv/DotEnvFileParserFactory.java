@@ -37,7 +37,7 @@ public class DotEnvFileParserFactory implements EnvVarsProviderFactory {
 
     @Override
     public @Nullable Predicate<String> getFileNamePredicate() {
-        return null;
+        return fileName -> fileName.endsWith(".env");
     }
 
     @Override

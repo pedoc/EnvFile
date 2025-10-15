@@ -33,7 +33,7 @@ public class ShenvProviderFactory implements EnvVarsProviderFactory {
 
     @Override
     public @Nullable Predicate<String> getFileNamePredicate() {
-        return name -> name.equals(".sh");
+        return fileName -> fileName.endsWith(".sh");
     }
 
     @Override

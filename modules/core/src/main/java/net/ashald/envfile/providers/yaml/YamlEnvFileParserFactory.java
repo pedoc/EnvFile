@@ -29,6 +29,7 @@ public class YamlEnvFileParserFactory implements EnvVarsProviderFactory {
     }
 
     @NotNull
+    @Override
     public String getTitle() {
         return "JSON/YAML";
     }
@@ -40,12 +41,12 @@ public class YamlEnvFileParserFactory implements EnvVarsProviderFactory {
 
     @Override
     public @Nullable Predicate<String> getFileNamePredicate() {
-        return null;
+        return fileName -> fileName.endsWith(".yml") || fileName.endsWith(".yaml") || fileName.endsWith(".json");
     }
 
     @Override
     public boolean showHiddenFiles() {
-        return false;
+        return true;
     }
 
 }
