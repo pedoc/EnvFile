@@ -26,9 +26,9 @@ allprojects {
 
     ext.jetbrains = [
             version: "2024.3.7",
-//            pycharm : "PythonCore:253.28294.334",
-//            rubymine: "org.jetbrains.plugins.ruby:253.28294.334",
-//            goland  : "org.jetbrains.plugins.go:243.28141.18",
+            pycharm : "PythonCore:243.28141.18",
+            rubymine: "org.jetbrains.plugins.ruby:243.28141.18",
+            goland  : "org.jetbrains.plugins.go:243.28141.18",
             scala   : "org.intellij.scala:2024.3.42"
     ]
 }
@@ -47,12 +47,12 @@ intellij {
 }
 buildSearchableOptions.enabled = false
 
-//dependencies {
-//    implementation project(":envfile-products-idea")
-//    implementation project(":envfile-products-pycharm")
-//    implementation project(":envfile-products-rubymine")
-//    implementation project(":envfile-products-goland")
-//}
+dependencies {
+    implementation project(":envfile-products-idea")
+    implementation project(":envfile-products-pycharm")
+    implementation project(":envfile-products-rubymine")
+    implementation project(":envfile-products-goland")
+}
 
 wrapper {
     gradleVersion = "8.14.3"
