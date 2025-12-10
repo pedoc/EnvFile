@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "idea"
-    id "org.jetbrains.intellij" version "1.9.0"
+    id "org.jetbrains.intellij" version "1.17.4"
     id "pl.allegro.tech.build.axion-release" version "1.14.1"
 }
 
@@ -16,8 +16,8 @@ scmVersion {
 
 allprojects {
     apply plugin: 'java'
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 21
+    targetCompatibility = 21
 
     repositories {
         mavenCentral()
@@ -25,11 +25,11 @@ allprojects {
     project.version = scmVersion.version
 
     ext.jetbrains = [
-            version : "2022.2",
-            pycharm : "PythonCore:222.3345.40",
-            rubymine: "org.jetbrains.plugins.ruby:222.3345.16",
-            goland  : "org.jetbrains.plugins.go:222.3345.90",
-            scala   : "org.intellij.scala:2022.2.3"
+            version: "2024.3",
+            pycharm : "PythonCore:253.28294.334",
+            rubymine: "org.jetbrains.plugins.ruby:253.28294.334",
+            goland  : "org.jetbrains.plugins.go:253.28294.251",
+            scala   : "org.intellij.scala:2025.3.23"
     ]
 }
 
@@ -55,10 +55,10 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = "7.5.1"
+    gradleVersion = "8.14.3"
 }
 
-runIde.ideDir =  java.util.Optional.ofNullable(System.getenv("IDE")).map(File::new).orElse(null)
+runIde.ideDir = java.util.Optional.ofNullable(System.getenv("IDE")).map(File::new).orElse(null)
 
 tasks {
     patchPluginXml {
