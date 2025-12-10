@@ -25,11 +25,11 @@ allprojects {
     project.version = scmVersion.version
 
     ext.jetbrains = [
-            version: "2024.3",
+            version: "2024.3.7",
 //            pycharm : "PythonCore:253.28294.334",
 //            rubymine: "org.jetbrains.plugins.ruby:253.28294.334",
 //            goland  : "org.jetbrains.plugins.go:243.28141.18",
-//            scala   : "org.intellij.scala:2025.3.23"
+            scala   : "org.intellij.scala:2024.3.42"
     ]
 }
 

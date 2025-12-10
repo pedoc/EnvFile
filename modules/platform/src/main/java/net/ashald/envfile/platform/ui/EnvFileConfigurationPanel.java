@@ -32,17 +32,12 @@ import net.ashald.envfile.platform.ui.table.EnvFileIsActiveColumnInfo;
 import net.ashald.envfile.platform.ui.table.EnvFileIsExecutableColumnInfo;
 import net.ashald.envfile.platform.ui.table.EnvFilePathColumnInfo;
 import net.ashald.envfile.platform.ui.table.EnvFileTypeColumnInfo;
-import net.ashald.envfile.providers.toml.TomlEnvFileParser;
 import net.ashald.envfile.providers.runconfig.RunConfigEnvVarsProvider;
 
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -50,6 +45,7 @@ import java.util.LinkedList;
 import java.util.function.Predicate;
 
 
+@SuppressWarnings({"removal", "D"})
 class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPanel {
     private static final int MAX_RECENT = 5;
     private static final LinkedList<EnvFileEntry> RECENT = new LinkedList<>();
@@ -76,7 +72,8 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
 
         // Create Table
         envFilesTable = new TableView<>(envFilesModel);
-        envFilesTable.getEmptyText().setText("No environment variables files selected");
+        envFilesTable.getEmptyText()
+                .setText("No environment variables files selected");
 
         setUpColumnWidth(envFilesTable, 0, columnIsActive, 20);
         setUpColumnWidth(envFilesTable, 1, columnIsExecutable, 20);
@@ -168,14 +165,22 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
         add(envFilesTableDecoratorPanel, BorderLayout.CENTER);
     }
 
-    private void setUpColumnWidth(TableView<EnvFileEntry> table, int columnIdx, ColumnInfo<?, ?> columnInfo, int extend) {
+    private void setUpColumnWidth(
+            TableView<EnvFileEntry> table,
+            int columnIdx,
+            ColumnInfo<?, ?> columnInfo,
+            int extend
+    ) {
         JTableHeader tableHeader = table.getTableHeader();
         FontMetrics fontMetrics = tableHeader.getFontMetrics(tableHeader.getFont());
 
         int preferredWidth = fontMetrics.stringWidth(columnInfo.getName()) + extend;
 
-        table.getColumnModel().getColumn(columnIdx).setCellRenderer(new BooleanTableCellRenderer());
-        TableColumn tableColumn = tableHeader.getColumnModel().getColumn(columnIdx);
+        table.getColumnModel()
+                .getColumn(columnIdx)
+                .setCellRenderer(new BooleanTableCellRenderer());
+        TableColumn tableColumn = tableHeader.getColumnModel()
+                .getColumn(columnIdx);
         tableColumn.setWidth(preferredWidth);
         tableColumn.setPreferredWidth(preferredWidth);
         tableColumn.setMinWidth(preferredWidth);
@@ -190,17 +195,21 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
         DefaultActionGroup actionGroup = new DefaultActionGroup();
 
         for (final EnvVarsProviderExtension extension : EnvVarsProviderExtension.getParserExtensions()) {
-            if (!extension.getFactory().isEditable()) {
+            if (!extension.getFactory()
+                    .isEditable()) {
                 continue;
             }
 
-            final String title = String.format("%s file", extension.getFactory().getTitle());
-            final Predicate<String> fileNamePredicate = extension.getFactory().getFileNamePredicate();
+            final String title = String.format("%s file", extension.getFactory()
+                    .getTitle());
+            final Predicate<String> fileNamePredicate = extension.getFactory()
+                    .getFileNamePredicate();
             final Condition<VirtualFile> maybeFileFilter = fileNamePredicate != null ?
                     file -> fileNamePredicate.test(file.getName()) :
                     null;
 
-            final boolean showHiddenFiles = extension.getFactory().showHiddenFiles();
+            final boolean showHiddenFiles = extension.getFactory()
+                    .showHiddenFiles();
             AnAction anAction = new AnAction(title) {
                 @Override
                 public void actionPerformed(AnActionEvent e) {
@@ -216,7 +225,9 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
 
                     if (selectedFile != null) {
                         String selectedPath = selectedFile.getPath();
-                        String baseDir = runConfig.getProject().getBaseDir().getPath();
+                        String baseDir = runConfig.getProject()
+                                .getBaseDir()
+                                .getPath();
                         if (selectedPath.startsWith(baseDir)) {
                             selectedPath = selectedPath.substring(baseDir.length() + 1);
                         }
@@ -238,7 +249,9 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
                         synchronized (RECENT) {
                             RECENT.remove(newOptions);
                             RECENT.addFirst(newOptions);
-                            if (RECENT.size() > MAX_RECENT) RECENT.removeLast();
+                            if (RECENT.size() > MAX_RECENT) {
+                                RECENT.removeLast();
+                            }
                         }
                     }
                 }
@@ -279,7 +292,8 @@ class EnvFileConfigurationPanel<T extends RunConfigurationBase<?>> extends JPane
         final String popupPlace = ActionPlaces.getActionGroupPopupPlace(getClass().getSimpleName());
         final ListPopup popup =
                 new PopupFactoryImpl.ActionGroupPopup(
-                        "Add...", actionGroup, DataManager.getInstance().getDataContext(this),
+                        "Add...", actionGroup, DataManager.getInstance()
+                        .getDataContext(this),
                         false, false, false, false,
                         null, -1, Conditions.<AnAction>alwaysTrue(), popupPlace);
 

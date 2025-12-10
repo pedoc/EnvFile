@@ -9,7 +9,7 @@ intellij {
             "java",
             "gradle",
             "maven",
-            //jetbrains.scala
+            jetbrains.scala
     ]
 }
 buildSearchableOptions.enabled = false
