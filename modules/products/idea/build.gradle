@@ -6,10 +6,10 @@ plugins {
 intellij {
     version = jetbrains.version
     plugins = [
-        "java",
-        "gradle",
-        "maven",
-        jetbrains.scala
+            "java",
+            "gradle",
+            "maven",
+            //jetbrains.scala
     ]
 }
 buildSearchableOptions.enabled = false

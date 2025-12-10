@@ -16,8 +16,8 @@ scmVersion {
 
 allprojects {
     apply plugin: 'java'
-    sourceCompatibility = 21
-    targetCompatibility = 21
+    sourceCompatibility = 17
+    targetCompatibility = 17
 
     repositories {
         mavenCentral()
@@ -26,10 +26,10 @@ allprojects {
 
     ext.jetbrains = [
             version: "2024.3",
-            pycharm : "PythonCore:253.28294.334",
-            rubymine: "org.jetbrains.plugins.ruby:253.28294.334",
-            goland  : "org.jetbrains.plugins.go:253.28294.251",
-            scala   : "org.intellij.scala:2025.3.23"
+//            pycharm : "PythonCore:253.28294.334",
+//            rubymine: "org.jetbrains.plugins.ruby:253.28294.334",
+//            goland  : "org.jetbrains.plugins.go:243.28141.18",
+//            scala   : "org.intellij.scala:2025.3.23"
     ]
 }
 
@@ -47,12 +47,12 @@ intellij {
 }
 buildSearchableOptions.enabled = false
 
-dependencies {
-    implementation project(":envfile-products-idea")
-    implementation project(":envfile-products-pycharm")
-    implementation project(":envfile-products-rubymine")
-    implementation project(":envfile-products-goland")
-}
+//dependencies {
+//    implementation project(":envfile-products-idea")
+//    implementation project(":envfile-products-pycharm")
+//    implementation project(":envfile-products-rubymine")
+//    implementation project(":envfile-products-goland")
+//}
 
 wrapper {
     gradleVersion = "8.14.3"
